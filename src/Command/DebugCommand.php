@@ -22,10 +22,7 @@ class DebugCommand extends Command
         $this->mappings = $mappings;
     }
 
-    /**
-     * @return void
-     */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('debug:tactician');
     }
