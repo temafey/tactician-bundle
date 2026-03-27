@@ -42,7 +42,8 @@
     "symfony/console": "For debugging command-to-handler routing using the tactician:debug console command",
     "symfony/validator": "For command validator middleware",
     "symfony/security": "For command security middleware",
-    "league/tactician-doctrine": "For doctrine transaction middleware"
+    "league/tactician-doctrine": "For doctrine transaction middleware",
+    "doctrine/dbal": "Required for DatabaseTransactionMiddleware"
   },
   "autoload" : {
     "psr-4" : {
@@ -69,6 +70,7 @@
     "symfony/security-bundle": "^3.4|^4.4|^5.0|^6.0|^7.0|^8.0",
     "matthiasnoback/symfony-config-test": "^4.2.1",
     "matthiasnoback/symfony-dependency-injection-test": "^4.2.1",
-    "phpspec/prophecy": "^1.18"
+    "phpspec/prophecy": "^1.18",
+    "doctrine/dbal": "^3.0|^4.0"
   }
 }
