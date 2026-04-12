@@ -1,3 +1,17 @@
+## Unreleased
+
+### Added
+- VP-6: `TransientErrorRetryMiddleware` — retries command execution on
+  `Doctrine\DBAL\Exception\RetryableException` with exponential backoff
+  (50 ms, 100 ms, 200 ms) up to `maxRetries` attempts (default: 3).
+  Walks the full exception chain via `getPrevious()` up to depth 10 as
+  defense-in-depth, detecting retryable errors even when wrapped by generic
+  exception layers (e.g. a logging or instrumentation wrapper). Must be placed
+  BEFORE `DatabaseTransactionMiddleware` in the middleware stack so each retry
+  attempt opens a fresh database transaction. Registered as optional service
+  `tactician.middleware.transient_error_retry` — projects opt in by listing it
+  in their tactician middleware array.
+
 ## 1.5.2
 - #140 - Fix PHP 8.4
 

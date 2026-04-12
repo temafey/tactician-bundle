@@ -29,3 +29,14 @@ services:
         class: League\Tactician\Bundle\Command\DebugCommand
         tags:
             - { name: console.command }
+
+    # VP-6: Optional retry middleware for transient DBAL errors (deadlocks, serialization failures).
+    # Place BEFORE tactician.middleware.doctrine (DatabaseTransactionMiddleware) in the bus stack
+    # so each retry attempt opens a fresh database transaction.
+    # Projects opt in by listing this service in their tactician middleware array.
+    tactician.middleware.transient_error_retry:
+        class: League\Tactician\Bundle\Middleware\TransientErrorRetryMiddleware
+        arguments:
+            $maxRetries: 3
+            $initialBackoffMs: 50
+            $logger: '@logger'
